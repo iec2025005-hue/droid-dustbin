@@ -1,0 +1,39 @@
+# Droid Dustbin Robot — Arm Raise Detection Module
+# Dependency file for Raspberry Pi 4, Raspberry Pi OS Bookworm, Python 3.11
+#
+# ════════════════════════════════════════════════════════════════════
+#  CRITICAL: DO NOT install opencv-python via pip.
+#
+#  pip install opencv-python bundles its own GTK3 and libGL shared
+#  libraries.  On Raspberry Pi OS Bookworm these conflict with the
+#  system's libGL (mesa/wayland).  The result: cv2.imshow() opens a
+#  window but renders a black rectangle.
+#
+#  The ONLY correct way to install OpenCV on Raspberry Pi OS Bookworm
+#  is via apt:
+#
+#      sudo apt install -y python3-opencv
+#
+#  Then create your virtual environment with system-site-packages:
+#
+#      python3 -m venv venv --system-site-packages
+#
+#  This makes the apt-installed cv2 visible inside the venv without
+#  any pip/apt conflict.
+#
+#  Similarly, picamera2 and its libcamera dependencies must come from
+#  apt, not pip:
+#
+#      sudo apt install -y python3-picamera2
+#
+# ════════════════════════════════════════════════════════════════════
+
+# Google MediaPipe — provides the Pose landmark model.
+# We use the classic mediapipe.solutions.pose API.
+# Pin to <0.11 because 0.11+ restructured the solutions namespace
+# and aarch64 wheel availability on PyPI is limited above this version.
+mediapipe>=0.10.0,<0.11.0
+
+# NumPy — used for frame array manipulation and pixel format conversion.
+# NumPy >=1.24.0 is required for compatibility with MediaPipe on Python 3.11.
+numpy>=1.24.0
