@@ -29,9 +29,14 @@ COLOR_YELLOW = (0,   200, 220)
 COLOR_WHITE  = (255, 255, 255)
 COLOR_CYAN   = (230, 200,   0)
 
-mp_pose    = mp.solutions.pose
-mp_drawing = mp.solutions.drawing_utils
-mp_styles  = mp.solutions.drawing_styles
+try:
+    mp_pose    = mp.solutions.pose
+    mp_drawing = mp.solutions.drawing_utils
+    mp_styles  = mp.solutions.drawing_styles
+except AttributeError:
+    import mediapipe.python.solutions.pose as mp_pose
+    import mediapipe.python.solutions.drawing_utils as mp_drawing
+    import mediapipe.python.solutions.drawing_styles as mp_styles
 
 LEFT_SHOULDER  = mp_pose.PoseLandmark.LEFT_SHOULDER
 RIGHT_SHOULDER = mp_pose.PoseLandmark.RIGHT_SHOULDER
